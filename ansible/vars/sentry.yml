@@ -1,6 +1,12 @@
+---
+# Sentry server variables
+
 sentry:
+    user: sentry
+    home: /www/sentry
     virtualenv: /www/sentry/
     template: sentry.conf.py
+    admin_username: admin
     admin_email: admin@sentry.server
     admin_password: admin
     hostname: sentry.server
@@ -8,7 +14,7 @@ sentry:
     secret: VDpBG3DQOapXLkDqQDt8ToJd4ty6/1GOvpTHUO4o0sHtDIMAIKzxZQ==
     port: 9000
     mailgun_key: ''
-    extensions: [ "sentry-github", "sentry-slack" ]
+    extensions: [ "sentry-jira", "sentry-slack" ]
     twitter_consumer_key: ''
     twitter_consumer_secret: ''
     facebook_app_id: ''

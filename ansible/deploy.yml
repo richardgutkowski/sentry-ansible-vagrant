@@ -1,10 +1,10 @@
 ---
 - hosts: all
-  sudo: true
+  sudo: yes
   vars:
     web_server: nginx
-    servername: sentry.server 192.168.33.89
-    timezone: Europe/Brussels
+    servername: sentry.local 192.168.33.90
+    timezone: Europe/London
   vars_files:
     - vars/pgsql.yml
     - vars/sentry.yml
@@ -12,9 +12,8 @@
     - vars/common.yml
     - vars/nginx.yml
   roles:
-    - init
+    - common
     - nginx
     - pgsql
-    - sentry
     - supervisor
-    - app
+    - sentry

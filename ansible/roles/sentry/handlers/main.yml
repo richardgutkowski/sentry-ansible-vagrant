@@ -1,3 +1,17 @@
+---
+
+#- name: sentry restart
+#  service: name={{item}} state=restarted
+#  with_items:
+#    - sentry-web
+#    - sentry-worker
+
+#- name: sentry reload
+#  service: name={{item}} state=reloaded
+#  with_items:
+#    - sentry-web
+#    - sentry-worker
+
 - name: Start sentry
   command: /www/sentry/bin/sentry --config=/etc/sentry.conf.py start
   notify: start sentry workers

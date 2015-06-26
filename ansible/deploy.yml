@@ -15,5 +15,5 @@
     - common
     - nginx
     - pgsql
-    - supervisor
     - sentry
+    - supervisor

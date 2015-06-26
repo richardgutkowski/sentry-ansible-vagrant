@@ -78,14 +78,12 @@
             mode=0755
   register: result_setup
 
-- shell: "{{sentry.home}}/bin/python setup.py"
+- name: Update setup config
+  shell: "{{sentry.home}}/bin/python setup.py"
   sudo: yes
   args:
     chdir: "{{sentry.home}}"
   when: result_setup.changed
-
-- name: Reload supervisor
-  shell: supervisorctl reload
 
 - name: Set cron to cleanup Sentry
   cron: name="Cleanup sentry" minute="0" hour="3" job="/www/sentry/bin/sentry cleanup --days=30"

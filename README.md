@@ -1,59 +1,54 @@
 # [Sentry](https://getsentry.com/welcome/) vagrant box
 
+### Test the playbook in vagrant
+
 - Run `vagrant up`
-- Add `192.168.33.89 sentry.server` to `/etc/hosts`
+- Add `192.168.33.90 sentry.server` to `/etc/hosts`
 - Run `vagrant ssh`
-- Run `/www/sentry/bin/sentry --config=/etc/sentry.conf.py changepassword sentry@sentry.com` and set a password
-- Go to `http://sentry.server`
-- Log in with `sentry@sentry.com
+- Run `/www/sentry/bin/sentry --config=/etc/sentry.conf.py changepassword admin@sentry.local` and set a password
+- Go to `http://sentry.local`
+- Log in with `admin@sentry.local
 
-## Leverage this box in a symfony2 application
-
-### Install raven 
-
-```json
-	"require": {
-        ...
-        "raven/raven": "~0.8",
-        ...
-    }    
-```
-
-### Add some monolog config
+### Variables
 
 ```yml
-monolog:
-    handlers:
-        main:
-            type:         fingers_crossed
-            action_level: error
-            handler:      grouped_main
 
-        sentry:
-            type:  raven
-            dsn: http://<public_key>:<private_key>@sentry.server/<project_id>
-            level: notice
+sentry:
+    user: sentry
+    home: /www/sentry
+    virtualenv: /www/sentry/
+    template: sentry.conf.py
+    admin_username: admin
+    admin_email: admin@sentry.local
+    admin_password: admin
+    hostname: sentry.local
+    server_email: sentry@sentry.local
+    secret: VDpBG3DQOapXLkDqQDt8ToJd4ty6/1GOvpTHUO4o0sHtDIMAIKzxZQ==
+    port: 9000
+    mailgun_key: ''
+    extensions: [ "sentry-jira", "sentry-slack" ]
+    twitter_consumer_key: ''
+    twitter_consumer_secret: ''
+    facebook_app_id: ''
+    facebook_api_secret: ''
+    google_oauth2_client_id: ''
+    google_oauth2_client_secret: ''
+    github_app_id: ''
+    github_api_secret: ''
+    trello_api_key: ''
+    trello_api_secret: ''
+    bitbucket_consumer_key: ''
+    bitbucket_consumer_secret: ''
 
-        # Groups
-        grouped_main:
-            type:    group
-            members: [sentry, streamed_main]
+pgsql:
+    user: sentry
+	  password: sentry
+	  database: sentry
+	  auth_template: pg_hba.conf.j2
 
-        # Streams
-        streamed_main:
-            type:  stream
-            path:  %kernel.logs_dir%/%kernel.environment%.log
-            level: error
+supervisor:
+    port: 9001
+    username: supervisor
+    password: supervisor
+
 ```
-
-### Demo
-
-See an implemented version by cloning or forking the following repository: [kristofvc/qa-test](https://github.com/kristofvc/qa-test)
-
-## Testing
-
-This script was only tested on Mac OSX 10.10.3 and a vagrant box with Ubuntu 14.04
-
-## Contributing
-
-Feel free to fork this box and contribute to make it better!

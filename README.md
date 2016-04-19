@@ -1,4 +1,12 @@
-# [Sentry](https://getsentry.com/welcome/) vagrant box
+# [Sentry](https://getsentry.com/welcome/) Vagrant with Ansible
+
+### Intro
+
+Hello, this is a project which enables you to spin up a development environment locally for Sentry. This will allow you to safely experiment with its rich plugin capabilities and any other custom python(django framework) you want to add to it. 
+
+Once you are satisfied with the dev environment you can use this playbook to also deploy against your production environment. 
+
+Further details to follow on that!
 
 ### Test the playbook in vagrant
 
